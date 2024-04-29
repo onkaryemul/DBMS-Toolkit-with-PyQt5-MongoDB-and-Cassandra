@@ -13,6 +13,7 @@ Simplify database administration tasks with this versatile PyQt5 GUI application
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
+- [Setup of Cassandra using Docker](#setup-of-cassandra-using-docker)
 - [Usage](#usage)
 - [Contributing](#contributing)
 
@@ -55,7 +56,52 @@ Simplify database administration tasks with this versatile PyQt5 GUI application
       pip install PyQt5 pymongo cassandra-driver python-dotenv
    ```
 
+## Setup of Cassandra using Docker: 
 
+### Run Cassandra using Docker
+
+- Docker is a platform for developing, shipping, and running applications inside containers. 
+
+1. **First, pull the Cassandra Docker image:**
+   
+   ```bash
+      docker pull cassandra
+   ```
+   - This command pulls the latest Cassandra Docker image from the Docker Hub repository.
+   
+2. **Then, run the Cassandra container:**
+
+   ```bash
+      docker run -p 7000:7000 -p 7001:7001 -p 7199:7199 -p 9042:9042 -p 9160:9168 --name cassandra -d cassandra:latest
+   ```
+   
+   - The `docker run` command creates and starts a new Docker container based on the Cassandra image. It maps specific ports on the host machine to ports inside the container, allowing communication with Cassandra.
+   - The `--name` flag assigns a name to the container for easy reference, and the `-d` flag detaches the container and runs it in the background.
+   - The ports `7000`, `7001`, `7199`, `9042`, and `9160` are commonly used by Cassandra for various communication purposes.
+
+   
+4. **To verify that the container is running, execute:**
+
+   ```bash
+      docker ps
+   ```
+
+5. **Access the Cassandra container:**
+   - After running the container, you can access its shell environment using this command. It allows you to execute commands inside the running Cassandra container.
+
+   ```bash
+      docker exec -it cassandra bash
+   ```
+   - Alternatively, you can use the CONTAINER ID instead of the container name.
+ 
+6. **Access the CQL shell:**
+   - Once inside the container, you can access the Cassandra Query Language (CQL) shell. This interactive shell allows you to execute CQL commands to interact with the Cassandra database.
+
+   ```bash
+      cqlsh
+   ```
+
+   
 ## Usage
 
 1. **.env Configuration:**
